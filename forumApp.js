@@ -26,8 +26,19 @@ app.get('/topics', function (req, res){
     var html = Mustache.render(template, {allTopics: topics});
     res.send(html);
   });
-
 });
+
+app.get('/topics/:id', function (req, res){
+  var id = rec.params.id;
+  db.all("SELECT * FROM topics WHERE id ="+id+";", {}, function (err, topic){
+    fs.readFile('./views/show.html', 'utf8', function (err, htmlTid){
+      var renderedHTML = Mustache.render(htmlTid, topic[0]);
+      console.log('htmlTid[0]');
+      //res.send(renderedHTML);
+    });
+  });
+});
+
   
 
 
