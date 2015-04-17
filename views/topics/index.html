@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <title>Jake's Forum's list of topics</title>
+</head>
+<body>
+<div><h1>Forum Topics</h1></div>
+<ul>
+  {{#allTopics}}
+  <li><a href="/topics/{{id}}">{{title}} - {{author}} - {{vote}}</a></li>
+  {{/allTopics}}
+</ul>
+  
+</body>
+</html>
