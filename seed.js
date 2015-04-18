@@ -1,5 +1,5 @@
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('./forum.db');
+var db = new sqlite3.Database('./database.db');
 
 db.run("INSERT INTO topics (title, author, body, vote) VALUES ('How to create better bokeh', 'bobby', 'Body of the topic','0')");
 db.run("INSERT INTO topics (title, author, body, vote) VALUES ('How to build better websites', 'cary', 'Body of the topic','0' )");

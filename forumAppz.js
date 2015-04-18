@@ -9,18 +9,19 @@ var bodyParser = require('body-parser');
 var util = require('util');
 
 var app = express();
-var db = new sqlite3.Database('./forum.db');
+var db = new sqlite3.Database('./database.db');
 
 app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
 
-//homepage get
+//VIEWING THE HOMEPAGE
 app.get('/', function(req, res){
   res.send(fs.readFileSync('./views/index.html', 'utf8'));
 });
-//topics list get
+
+//VIEWING ALL TOPICS IN A LIST
 app.get('/topics', function (req, res){
   var template = fs.readFileSync('./views/topics/index.html', 'utf8');
   db.all("SELECT * FROM topics;", function (err, topics){
@@ -28,18 +29,27 @@ app.get('/topics', function (req, res){
     res.send(html);
   });
 });
-
+//ADDING A TOPIC
 //takes the user to the add page
 app.get('/topics/new', function (req, res){
-  //console.log("hello");
   res.send(fs.readFileSync('./views/topics/new.html', 'utf8'));//syncronous readFileSync to keep it from blowing past everything.
 });
 //posts into the add page
 app.post('/topics/new', function (req, res){
   console.log(req.body);
-  //res.redirect("/topics");
   db.run("INSERT INTO topics (title, author, body, vote) VALUES ('"+req.body.title+"','"+req.body.author+"','"+req.body.body+"', '"+0+"')");
+  res.redirect("/topics");
 });
+//edit an individual topic
+app.get('/topics/:id/edit', function (req, res){
+  res.send(fs.readFileSync('./views/topics/edit.html', 'utf8'));//syncronous readFileSync to keep it from blowing past everything.
+});
+app.put('/topics/:id', function (req, res){
+  var id = req.params.id;
+  db.run("UPDATE topics SET breed =  '" + puppyInfo.breed + "', color = '" + puppyInfo.color + "' WHERE id = " + id + ";");
+});
+
+
 //deletes a topic
 app.delete('/topics/:id', function (req, res){
   var id = req.params.id;
@@ -47,7 +57,7 @@ app.delete('/topics/:id', function (req, res){
   res.redirect("/topics");
 });
 
-//individual topic get
+//individual topic get always keep this on the bottom
 app.get('/topics/:id', function (req, res){
   var id = req.params.id;
   db.all("SELECT * FROM topics WHERE id ="+id+";", {}, function (err, data){
@@ -60,11 +70,6 @@ app.get('/topics/:id', function (req, res){
     });
   });
 });
-
-
-  
-
-
 
 app.listen(3000, function() {
   console.log("The server is LISTENING bioche!");

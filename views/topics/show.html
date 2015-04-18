@@ -8,8 +8,12 @@
   <h1>{{title}}</h1>
   <h2>Written by {{author}}</h2>
   <p>{{body}}</p>
-  <form method="POST" action="/topics/{{id}}?_method=PUT">
+  <form method="PUT" action="/topics/{{id}}/edit?_method=PUT">
     <button type="submit">Edit Topic</button>
   </form>
+  <form method="POST" action="/topics/{{id}}?_method=DELETE">
+    <button type="submit">Delete Topic</button>
+  </form>
+  
 </body>
 </html>
