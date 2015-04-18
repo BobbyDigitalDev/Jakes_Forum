@@ -34,11 +34,17 @@ app.get('/topics/new', function (req, res){
   //console.log("hello");
   res.send(fs.readFileSync('./views/topics/new.html', 'utf8'));//syncronous readFileSync to keep it from blowing past everything.
 });
-
-app.post('./topics:id', function (req, res){
+//posts into the add page
+app.post('/topics/new', function (req, res){
   console.log(req.body);
-  db.run("INSERT INTO topics (title, author, body, vote) VALUES ('"+req.body.title+"','"+req.body.author+"','"+req.body.body+"')");
   //res.redirect("/topics");
+  db.run("INSERT INTO topics (title, author, body, vote) VALUES ('"+req.body.title+"','"+req.body.author+"','"+req.body.body+"', '"+0+"')");
+});
+//deletes a topic
+app.delete('/topics/:id', function (req, res){
+  var id = req.params.id;
+  db.run("DELETE FROM topics WHERE id = "+id+";");
+  res.redirect("/topics");
 });
 
 //individual topic get
@@ -47,7 +53,7 @@ app.get('/topics/:id', function (req, res){
   db.all("SELECT * FROM topics WHERE id ="+id+";", {}, function (err, data){
     fs.readFile('./views/topics/show.html', 'utf8', function (err, contentsoFile){
       var renderedHTML = Mustache.render(contentsoFile, data[0]);
-      //console.log("hello");
+       //console.log("hello");
       res.send(renderedHTML);
       // console.log(renderedHTML);
       // console.log(body)
