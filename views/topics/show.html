@@ -5,15 +5,28 @@
   <title>Jake's Forum's - {{title}}}</title>
 </head>
 <body>
-  <h1>{{title}}</h1>
-  <h2>Written by {{author}}</h2>
-  <p>{{body}}</p>
-  <form method="PUT" action="/topics/{{id}}/edit?_method=PUT">
-    <button type="submit">Edit Topic</button>
-  </form></br>
-  <form method="POST" action="/topics/{{id}}?_method=DELETE">
-    <button type="submit">Delete Topic</button>
-  </form>
-  
+<!-- <form method="GET" action="/topics">
+  <button>Back to list of topics</button>
+</form> -->
+<nav>
+  <a href="/topics">All topics</a> |
+  <a href ="/topics/new">New Topic</a>
+</nav>
+
+<div><h1>{{title}}</h1></div>
+<h2>Written by {{author}}</h2>
+<p>{{body}}</p>
+<form method="PUT" action="/topics/{{id}}/edit?_method=PUT">
+  <button type="submit">Edit Topic</button>
+</form></br>
+
+
+<h2>Comment on this topic</h2>
+<form method ="POST" action="/topics/{{id}}/comments/new">
+  <TEXTAREA type="text" name="body" ROWS="20" COLS="100"/>
+</TEXTAREA></br>
+<button type ="submit">comment</button>
+</form>
+
 </body>
 </html>

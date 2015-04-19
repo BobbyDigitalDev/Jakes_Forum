@@ -7,6 +7,18 @@ var methodOverride = require('method-override');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var util = require('util');
+var marked = require('marked');
+
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: true,
+  smartLists: true,
+  smartypants: false
+});
 
 var app = express();
 var db = new sqlite3.Database('./database.db');
@@ -36,10 +48,19 @@ app.get('/topics/new', function (req, res){
 });
 //posts into the add page
 app.post('/topics/new', function (req, res){
-  console.log(req.body);
+  // console.log(req.body);
   db.run("INSERT INTO topics (title, author, body, vote) VALUES ('"+req.body.title+"','"+req.body.author+"','"+req.body.body+"', '"+0+"')");
   res.redirect("/topics");
 });
+
+//ADDING A COMMENT 
+app.post('topics/:id/comments/new', function (req, res){
+  id = req.params.id;
+  console.log(req.body);
+  db.run("INSERT INTO comments ")
+});
+
+
 //EDITING A TOPIC
 
 //Gets us to the edit resource

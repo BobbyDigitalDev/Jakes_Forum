@@ -7,15 +7,18 @@
   <title>Jake's Forum's list of topics</title>
 </head>
 <body>
+  <nav>
+    <a href="/topics">All topics</a> |
+    <a href ="/topics/new">New Topic</a>
+  </nav>
+  <div><h1>Forum Topics</h1> </div>
+  <!-- link to go to the /topics/new resource -->
 
-<div><h1>Forum Topics</h1> </div>
-<!-- link to go to the /topics/new resource -->
-<nav><a href ="/topics/new">New Topic</a></nav>
-<ul>
-  {{#allTopics}}
-  <li><a href="/topics/{{id}}">{{title}} - {{author}} - {{vote}}</a></li>
-  {{/allTopics}}
-</ul>
+  <ul>
+    {{#allTopics}}
+    <li><a href="/topics/{{id}}">{{title}} - {{author}} - {{vote}}</a></li>
+    {{/allTopics}}
+  </ul>
   
 </body>
 </html>

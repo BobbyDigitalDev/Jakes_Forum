@@ -5,6 +5,11 @@
   <title>Jake's Forum's Edit {{title}}</title>
 </head>
 <body>
+  <nav>
+    <a href="/topics">All topics</a> |
+    <a href ="/topics/new">New Topic</a>
+  </nav>
+  <div><h1>Edit the topic - "{{title}}"</h1></div>
   <form method="POST" action="/topics/{{id}}?_method=PUT">
     <input type="text" name="title" value="{{title}}">
     <input type="text" name="author" value="{{author}}">
@@ -12,6 +17,7 @@
 
     <button type="submit">Update</button>
   </form>
+  <h3>Delete this topic</h3>
 
   <form method="POST" action="/topics/{{id}}?_method=DELETE">
     <button type="submit">Delete Topic</button>
