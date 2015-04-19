@@ -40,13 +40,24 @@ app.post('/topics/new', function (req, res){
   db.run("INSERT INTO topics (title, author, body, vote) VALUES ('"+req.body.title+"','"+req.body.author+"','"+req.body.body+"', '"+0+"')");
   res.redirect("/topics");
 });
-//edit an individual topic
+//EDITING A TOPIC
+
+//Gets us to the edit resource
 app.get('/topics/:id/edit', function (req, res){
-  res.send(fs.readFileSync('./views/topics/edit.html', 'utf8'));//syncronous readFileSync to keep it from blowing past everything.
+  var template = fs.readFileSync('./views/topics/edit.html', 'utf8');
+  var id = req.params.id;
+  db.all("SELECT * FROM topics WHERE id = "+id+";", function (err, topics){
+    var htmlE= Mustache.render(template, topics[0]);
+    res.send(htmlE);
+  });
 });
+
+//to actually edit the topic
 app.put('/topics/:id', function (req, res){
   var id = req.params.id;
-  db.run("UPDATE topics SET breed =  '" + puppyInfo.breed + "', color = '" + puppyInfo.color + "' WHERE id = " + id + ";");
+  var topicsInfo = req.body;
+  db.run("UPDATE topics SET title =  '" + topicsInfo.title + "', author = '" + topicsInfo.author + "', body = '"+topicsInfo.body+"' WHERE id = " + id + ";");
+  res.redirect("/topics");
 });
 
 
@@ -63,10 +74,8 @@ app.get('/topics/:id', function (req, res){
   db.all("SELECT * FROM topics WHERE id ="+id+";", {}, function (err, data){
     fs.readFile('./views/topics/show.html', 'utf8', function (err, contentsoFile){
       var renderedHTML = Mustache.render(contentsoFile, data[0]);
-       //console.log("hello");
       res.send(renderedHTML);
-      // console.log(renderedHTML);
-      // console.log(body)
+      console.log(renderedHTML);
     });
   });
 });

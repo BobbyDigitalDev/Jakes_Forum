@@ -1,9 +1,10 @@
 ##Jake's Forums Spec
+###Viewing, creating, editing and deleting topics
 
+####Viewing topics
 When the user first accesses Jake's Forum, they will be presented with a
 <a href="http://i.imgur.com/2wCjEaN.png" target="_blank">welcome page</a>. A link on the homepage will take the user to a second page where they can view the current <a href="http://i.imgur.com/D7hCqqC.png" target="_blank">forum topics</a>
 
-###Creating a new topic
 From the forum <a hef="http://i.imgur.com/D7hCqqC.png"target="_blank">topics page</a>, the user will be able to create a new topic on the forum by clicking the "new topic" link at the top of the page.
 
 Once in the <a href="http://i.imgur.com/4bGhE15.png" target="_blank">Create Topic Page</a>, the user will be able to enter the title of their topic in the first field followed by the body copy of the topic in next field. Clicking on the submit button adds the topic to the list of topics and the user will returned to the main <a href="http://i.imgur.com/D7hCqqC.png" target="_blank"> list of topics.</a>
