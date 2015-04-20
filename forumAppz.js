@@ -41,6 +41,7 @@
       res.send(html);
     });
   });
+
   //ADDING A TOPIC
   //takes the user to the add page
   app.get('/topics/new', function (req, res){
@@ -48,8 +49,8 @@
   });
   //posts into the add page
   app.post('/topics/new', function (req, res){
-    // console.log(req.body);
-    db.run("INSERT INTO topics (title, author, body, vote) VALUES ('"+req.body.title+"','"+req.body.author+"','"+req.body.body+"', '"+0+"')");
+    console.log(req.body);
+    db.run("INSERT INTO topics (title, author, topicsbody, vote) VALUES ('"+req.body.title+"','"+req.body.author+"','"+req.body.topicsbody+"', '"+0+"')");
     res.redirect("/topics");
   });
 
@@ -59,11 +60,11 @@
     request.get('http://ipinfo.io/', function (error, response, body){  
     var parsedLoc = JSON.parse(body);
     var loc = parsedLoc.city + ', ' + parsedLoc.country;
-    db.run("INSERT INTO comments (body, location, topics_id) VALUES('"+req.body.body+"','"+loc+"','"+id+"')");
-    res.redirect("/topics");
+    console.log(body);
+    db.run("INSERT INTO comments (commentsbody, location, topics_id) VALUES('"+req.body.commentsbody+"','"+loc+"','"+id+"')");
+    res.redirect("/topics/"+ id);
     });
   });
-
 
   //EDITING A TOPIC
 
@@ -97,16 +98,17 @@
   app.get('/topics/:id', function (req, res){
     var id = req.params.id;
     db.all("SELECT * FROM topics WHERE id ="+id+";", {}, function (err, topic){
-      db.all("SELECT * FROM comments WHERE id = "+id+";",{}, function (err, comments){
+          console.log(topic);
+      db.all("SELECT * FROM comments WHERE topics_id = "+id+";",{}, function (err, comments){
+        var showTempl = fs.readFile('./views/topics/show.html', 'utf8');
+        //console.log(comments);
+          var renderedHTML = Mustache.render(showTempl, {});
+          res.send(renderedHTML);
         
-      });
-      fs.readFile('./views/topics/show.html', 'utf8', function (err, contentsoFile){
-        var renderedHTML = Mustache.render(contentsoFile, data[0]);
-        res.send(renderedHTML);
-        // console.log(renderedHTML);
       });
     });
   });
+          // debugger
 
     //individual topic get always keep this on the bottom WORKING!
   // app.get('/topics/:id', function (req, res){

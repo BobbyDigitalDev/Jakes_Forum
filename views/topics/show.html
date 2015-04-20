@@ -20,10 +20,16 @@
   <button type="submit">Edit Topic</button>
 </form></br>
 
+<ul>
+    {{#allComments}}
+    <li><a href="/topics/{{id}}/comments">{{commentsbody}} - {{location}}</a></li>
+    {{/allComments}}
+</ul>
+
 
 <h2>Comment on this topic</h2>
 <form method ="POST" action="/topics/{{id}}/comments">
-  <TEXTAREA type="text" name="body" ROWS="20" COLS="100"/>
+  <TEXTAREA type="text" name="commentsbody" ROWS="20" COLS="100"/>
 </TEXTAREA></br>
 <button type ="submit">comment</button>
 </form>
