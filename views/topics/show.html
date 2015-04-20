@@ -15,16 +15,11 @@
 
 <div><h1>{{title}}</h1></div>
 <h2>Written by {{author}}</h2>
-<p>{{body}}</p>
+<p>{{topicsbody}}</p>
 <form method="PUT" action="/topics/{{id}}/edit?_method=PUT">
   <button type="submit">Edit Topic</button>
 </form></br>
 
-<ul>
-    {{#allComments}}
-    <li><a href="/topics/{{id}}/comments">{{commentsbody}} - {{location}}</a></li>
-    {{/allComments}}
-</ul>
 
 
 <h2>Comment on this topic</h2>
@@ -32,9 +27,11 @@
   <TEXTAREA type="text" name="commentsbody" ROWS="20" COLS="100"/>
 </TEXTAREA></br>
 <button type ="submit">comment</button>
+<ul>
+  {{#allComments}}
+  <li><a href="/topics/{{topics_id}}/comments">{{commentsbody}} - {{location}}</a></li>
+  {{/allComments}}
+</ul>
 </form>
-
-
-
 </body>
 </html>

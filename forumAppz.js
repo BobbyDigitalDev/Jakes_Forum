@@ -82,10 +82,9 @@
   app.put('/topics/:id', function (req, res){
     var id = req.params.id;
     var topicsInfo = req.body;
-    db.run("UPDATE topics SET title =  '" + topicsInfo.title + "', author = '" + topicsInfo.author + "', body = '"+topicsInfo.body+"' WHERE id = " + id + ";");
+    db.run("UPDATE topics SET title =  '" + topicsInfo.title + "', author = '" + topicsInfo.author + "', topicsbody = '"+topicsInfo.topicsbody+"' WHERE id = " + id + ";");
     res.redirect("/topics");
   });
-
 
   //deletes a topic
   app.delete('/topics/:id', function (req, res){
@@ -97,30 +96,25 @@
   //individual topic get always keep this on the bottom
   app.get('/topics/:id', function (req, res){
     var id = req.params.id;
-    db.all("SELECT * FROM topics WHERE id ="+id+";", {}, function (err, topic){
-          console.log(topic);
+    db.all("SELECT * FROM topics WHERE id ="+id+";", {}, function (err, topics){
+          // debugger
       db.all("SELECT * FROM comments WHERE topics_id = "+id+";",{}, function (err, comments){
-        var showTempl = fs.readFile('./views/topics/show.html', 'utf8');
-        //console.log(comments);
-          var renderedHTML = Mustache.render(showTempl, {});
+        var showTempl = fs.readFileSync('./views/topics/show.html', 'utf8');
+        console.log(topics);
+          // console.log(showTempl);
+          var renderedHTML = Mustache.render(showTempl, {
+            id:topics[0].id,
+            title:topics[0].title,
+            author:topics[0].author,
+            topicsbody:topics[0].topicsbody,
+            allComments:comments
+          });
           res.send(renderedHTML);
         
       });
     });
   });
           // debugger
-
-    //individual topic get always keep this on the bottom WORKING!
-  // app.get('/topics/:id', function (req, res){
-  //   var id = req.params.id;
-  //   db.all("SELECT * FROM topics WHERE id ="+id+";", {}, function (err, data){
-  //     fs.readFile('./views/topics/show.html', 'utf8', function (err, contentsoFile){
-  //       var renderedHTML = Mustache.render(contentsoFile, data[0]);
-  //       res.send(renderedHTML);
-  //       // console.log(renderedHTML);
-  //     });
-  //   });
-  // });
 
   app.listen(3000, function() {
     console.log("The server is LISTENING bioche!");
