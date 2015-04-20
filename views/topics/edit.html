@@ -16,7 +16,7 @@
     Author:</br>
     <input type="text" name="author" value="{{author}}"></br>
     Topic Body:</br>
-    <TEXTAREA type="text" name="topicsbody" value="{{topicsbody}} "ROWS="20" COLS="100"/>
+    <TEXTAREA type="text" name="topicsbody" value="{{topicsbody}} "ROWS="20" COLS="100">
   </TEXTAREA>
   <button type="submit">Update</button>
 </form>
@@ -28,3 +28,33 @@
 
 </body>
 </html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jake's Forum's Edit {{title}}</title>
+</head>
+<body>
+  <nav>
+    <a href="/topics">All topics</a> |
+    <a href ="/topics/new">New Topic</a>
+  </nav>
+  <div><h1>Edit the topic - "{{title}}"</h1></div>
+  <form method="POST" action="/topics/{{id}}/edit?_method=PUT">
+    Title:</br>
+    <input type="text" name="title" value="{{title}}"></br>
+    Author:</br>
+    <input type="text" name="author" value="{{author}}"></br>
+    Topic Body:</br>
+    <TEXTAREA type="text" name="topicsbody" value="{{topicsbody}} "ROWS="20" COLS="100"/>
+  </TEXTAREA>
+  <button type="submit">Update</button>
+</form>
+<h3>Delete this topic</h3> -->
+
+<!-- <form method="POST" action="/topics/{{id}}?_method=DELETE">
+  <button type="submit">Delete Topic</button>
+</form>
+
+</body>
+</html> -->

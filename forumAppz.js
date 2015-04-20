@@ -1,4 +1,4 @@
-  var express = require('express');//requires the express module. creates our server
+ var express = require('express');//requires the express module. creates our server
   var sqlite3 = require('sqlite3');//requires the sqlite module. we need to read and write to the database
   var fs = require('fs');//allows us to read and write to external files
   var Mustache = require('mustache');//allows us to use templating
@@ -67,7 +67,6 @@
   });
 
   //EDITING A TOPIC
-
   //Gets us to the edit resource
   app.get('/topics/:id/edit', function (req, res){
     var template = fs.readFileSync('./views/topics/edit.html', 'utf8');

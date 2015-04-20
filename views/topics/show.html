@@ -24,6 +24,43 @@
 
 <h2>Comment on this topic</h2>
 <form method ="POST" action="/topics/{{id}}/comments">
+  <TEXTAREA type="text" name="commentsbody" ROWS="10" COLS="100"/>
+</TEXTAREA></br>
+<button type ="submit">comment</button>
+<ul>
+  {{#allComments}}
+  <li>{{commentsbody}} - {{location}}</li>
+  {{/allComments}}
+</ul>
+</form>
+</body>
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jake's Forum's - {{title}}}</title>
+</head>
+<body>
+ 
+<nav>
+  <a href="/topics">All topics</a> |
+  <a href ="/topics/new">New Topic</a>
+</nav>
+
+<div><h1>{{title}}</h1></div>
+
+<h2>Written by {{author}}</h2>
+<p>{{topicsbody}}</p>
+
+<form method="POST" action="/topics/{{id}}/edit?_method=PUT">
+  <button type="submit">Edit Topic</button>
+</form></br>
+
+
+<!comment box -->
+<!-- <h2>Comment on this topic</h2>
+<form method ="POST" action="/topics/{{id}}/comments">
   <TEXTAREA type="text" name="commentsbody" ROWS="20" COLS="100"/>
 </TEXTAREA></br>
 <button type ="submit">comment</button>
@@ -34,4 +71,4 @@
 </ul>
 </form>
 </body>
-</html>
+</html> -->
