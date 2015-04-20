@@ -83,7 +83,7 @@
     var id = req.params.id;
     var topicsInfo = req.body;
     db.run("UPDATE topics SET title =  '" + topicsInfo.title + "', author = '" + topicsInfo.author + "', topicsbody = '"+topicsInfo.topicsbody+"' WHERE id = " + id + ";");
-    res.redirect("/topics");
+    res.redirect("/topics/"+ id);
   });
 
   //deletes a topic
