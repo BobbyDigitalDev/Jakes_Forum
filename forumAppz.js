@@ -53,11 +53,17 @@ app.post('/topics/new', function (req, res){
   res.redirect("/topics");
 });
 
+//getting GEO location
+request.get('http://ipinfo.io/', function (error, response, body){  
+  var parsedLoc = JSON.parse(body);
+  var loc = parsedLoc.city + ', ' + parsedLoc.country;
+  console.log(loc);
+});
 //ADDING A COMMENT 
 app.post('topics/:id/comments/new', function (req, res){
   id = req.params.id;
-  console.log(req.body);
-  db.run("INSERT INTO comments ")
+  // console.log(req.body);
+  db.run("INSERT INTO comments (body, location, topics_id) VALUES('"+req.body.body+"','"+req.body.location+"','"+req.body.title+"') ")
 });
 
 
@@ -96,7 +102,7 @@ app.get('/topics/:id', function (req, res){
     fs.readFile('./views/topics/show.html', 'utf8', function (err, contentsoFile){
       var renderedHTML = Mustache.render(contentsoFile, data[0]);
       res.send(renderedHTML);
-      console.log(renderedHTML);
+      // console.log(renderedHTML);
     });
   });
 });
