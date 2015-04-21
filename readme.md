@@ -17,3 +17,6 @@ From the <a href = "http://i.imgur.com/D7hCqqC.png" target="_blank">list of topi
 The user can sort the articles by most commented on the <a href = "http://i.imgur.com/D7hCqqC.png" target="_blank">list of topics page</a>. To show the topics that have the most comments first, the user can click on the link labeled "comments".
 
 The user can also sort the topics by the ones that have the most votes. To show the topics that have the most votes first from the <a href = "http://i.imgur.com/D7hCqqC.png" target="_blank">list of topics page</a>, The user can click on the link labeled "votes".
+
+The user can access the website via the following address:
+http://45.55.150.174:3000/

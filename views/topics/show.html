@@ -13,6 +13,8 @@
   <a href ="/topics/new">New Topic</a>
 </nav>
 
+
+<!-- lists the topic -->
 <div><h1>{{title}}</h1></div>
 <h2>Written by {{author}}</h2>
 <p>{{topicsbody}}</p>
@@ -20,13 +22,22 @@
   <button type="submit">Edit Topic</button>
 </form></br>
 
+<!-- voting button -->
+<form method ="POST" action="/topics/{{id}}/vote/?_method=PUT">
+<!--   <input type="hidden" method="_method" value="PUT"> -->
+  <input type="hidden" name="vote" value="1">
+  <button type="submit">Vote</button>
+</form>
 
-
+<!-- commenting section -->
 <h2>Comment on this topic</h2>
 <form method ="POST" action="/topics/{{id}}/comments">
   <TEXTAREA type="text" name="commentsbody" ROWS="10" COLS="100"/>
 </TEXTAREA></br>
 <button type ="submit">comment</button>
+
+
+<!-- list of all previous comments -->
 <ul>
   {{#allComments}}
   <li>{{commentsbody}} - {{location}}</li>
@@ -35,40 +46,3 @@
 </form>
 </body>
 </html>
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Jake's Forum's - {{title}}}</title>
-</head>
-<body>
- 
-<nav>
-  <a href="/topics">All topics</a> |
-  <a href ="/topics/new">New Topic</a>
-</nav>
-
-<div><h1>{{title}}</h1></div>
-
-<h2>Written by {{author}}</h2>
-<p>{{topicsbody}}</p>
-
-<form method="POST" action="/topics/{{id}}/edit?_method=PUT">
-  <button type="submit">Edit Topic</button>
-</form></br>
-
-
-<!comment box -->
-<!-- <h2>Comment on this topic</h2>
-<form method ="POST" action="/topics/{{id}}/comments">
-  <TEXTAREA type="text" name="commentsbody" ROWS="20" COLS="100"/>
-</TEXTAREA></br>
-<button type ="submit">comment</button>
-<ul>
-  {{#allComments}}
-  <li><a href="/topics/{{topics_id}}/comments">{{commentsbody}} - {{location}}</a></li>
-  {{/allComments}}
-</ul>
-</form>
-</body>
-</html> -->

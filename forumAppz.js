@@ -28,12 +28,12 @@
   app.use(bodyParser.urlencoded({extended: false}));
   app.use(methodOverride('_method'));
 
-  //VIEWING THE HOMEPAGE
+  //VIEWING THE HOMEPAGE -- index.html
   app.get('/', function(req, res){
     res.send(fs.readFileSync('./views/index.html', 'utf8'));
   });
 
-  //VIEWING ALL TOPICS IN A LIST
+  //VIEWING ALL TOPICS IN A LIST -- views/topics/index.html
   app.get('/topics', function (req, res){
     var template = fs.readFileSync('./views/topics/index.html', 'utf8');
     db.all("SELECT * FROM topics;", function (err, topics){
@@ -43,20 +43,21 @@
   });
 
   //ADDING A TOPIC
-  //takes the user to the add page
+  //takes the user to the add page -- views/topics/new.html
   app.get('/topics/new', function (req, res){
     res.send(fs.readFileSync('./views/topics/new.html', 'utf8'));//syncronous readFileSync to keep it from blowing past everything.
   });
-  //posts into the add page
+
+  //posts into the add page -- views/edit.html
   app.post('/topics/new', function (req, res){
     console.log(req.body);
     db.run("INSERT INTO topics (title, author, topicsbody, vote) VALUES ('"+req.body.title+"','"+req.body.author+"','"+req.body.topicsbody+"', '"+0+"')");
     res.redirect("/topics");
   });
 
-  //ADDING A COMMENT 
+  //ADDING A COMMENT -- views/topics/show.html
   app.post('/topics/:id/comments', function (req, res){
-    id = req.params.id;
+    var id = req.params.id;
     request.get('http://ipinfo.io/', function (error, response, body){  
     var parsedLoc = JSON.parse(body);
     var loc = parsedLoc.city + ', ' + parsedLoc.country;
@@ -67,7 +68,7 @@
   });
 
   //EDITING A TOPIC
-  //Gets us to the edit resource
+  //Gets us to the edit resource -- views/show.html
   app.get('/topics/:id/edit', function (req, res){
     var template = fs.readFileSync('./views/topics/edit.html', 'utf8');
     var id = req.params.id;
@@ -77,7 +78,7 @@
     });
   });
 
-  //to actually edit the topic
+  //to actually edit the topic -- views/edit.html
   app.put('/topics/:id', function (req, res){
     var id = req.params.id;
     var topicsInfo = req.body;
@@ -85,7 +86,8 @@
     res.redirect("/topics/"+ id);
   });
 
-  //deletes a topic
+
+  //deletes a topic -- views/edit.html
   app.delete('/topics/:id', function (req, res){
     var id = req.params.id;
     db.run("DELETE FROM topics WHERE id = "+id+";");
@@ -109,10 +111,21 @@
             allComments:comments
           });
           res.send(renderedHTML);
-        
       });
     });
   });
+
+    //voting up a topic -- views/show.html
+  app.put('/topics/:id/vote/', function(req, res) {
+    var id = req.params.id;
+    // var vote=req.body.vote;
+    db.all("SELECT vote FROM topics WHERE id ="+id+";", {}, function(err, data){
+        var vote = data[0].vote
+        db.run("UPDATE topics SET vote = " + (vote + 1) + " WHERE id = " + id +";");
+      });
+    res.redirect("/topics/" + id);
+  });
+
           // debugger
 
   app.listen(3000, function() {
