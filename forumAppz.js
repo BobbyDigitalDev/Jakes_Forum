@@ -126,6 +126,8 @@
     res.redirect("/topics/" + id);
   });
 
-  app.listen(3000, function() {
+          // debugger
+
+  app.listen(8000, function() {
     console.log("The server is LISTENING bioche!");
   });

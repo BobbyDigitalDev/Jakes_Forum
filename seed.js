@@ -1,12 +1,12 @@
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('./database.db');
 
-// db.run("INSERT INTO topics (title, author, topicsbody, vote) VALUES ('How to create better bokeh', 'bobby', 'Body of the topic','0')");
-// db.run("INSERT INTO topics (title, author, topicsbody, vote) VALUES ('How to build better websites', 'cary', 'Body of the topic','0' )");
-// db.run("INSERT INTO topics (title, author, topicsbody, vote) VALUES ('How to write better songs', 'kangil', 'Body of the topic','0' )");
-// db.run("INSERT INTO topics (title, author, topicsbody, vote) VALUES ('How compose nicer poems', 'colby', 'Body of the topic','0' )");
-// db.run("INSERT INTO topics (title, author, topicsbody, vote) VALUES ('How to hack chromebooks', 'ryuske', 'Body of the topic','0' )");
-// db.run("INSERT INTO topics (title, author, topicsbody, vote) VALUES ('How learn japanese in 3 months', 'nesta', 'Body of the topic','0' )");
+db.run("INSERT INTO topics (title, author, topicsbody, vote) VALUES ('How to create better bokeh', 'bobby', 'Body of the topic','0')");
+db.run("INSERT INTO topics (title, author, topicsbody, vote) VALUES ('How to build better websites', 'cary', 'Body of the topic','0' )");
+db.run("INSERT INTO topics (title, author, topicsbody, vote) VALUES ('How to write better songs', 'kangil', 'Body of the topic','0' )");
+db.run("INSERT INTO topics (title, author, topicsbody, vote) VALUES ('How compose nicer poems', 'colby', 'Body of the topic','0' )");
+db.run("INSERT INTO topics (title, author, topicsbody, vote) VALUES ('How to hack chromebooks', 'ryuske', 'Body of the topic','0' )");
+db.run("INSERT INTO topics (title, author, topicsbody, vote) VALUES ('How learn japanese in 3 months', 'nesta', 'Body of the topic','0' )");
 
 db.run("INSERT INTO comments (commentsbody, location, topics_id) VALUES ('I love Bokeh', 'queens, NY, US', 1)" );
 db.run("INSERT INTO comments (commentsbody, location, topics_id) VALUES ('cameras are awesome', 'brooklyn, NY, US', 1)" );
