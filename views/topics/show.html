@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jake's Forum's - {{title}}}</title>
+</head>
+<body>
+<!-- <form method="GET" action="/topics">
+  <button>Back to list of topics</button>
+</form> -->
+<nav>
+  <a href="/topics">All topics</a> |
+  <a href ="/topics/new">New Topic</a>
+</nav>
+
+
+<!-- lists the topic -->
+<div><h1>{{title}}</h1></div>
+<h2>Written by {{author}}</h2>
+<p>{{topicsbody}}</p>
+<form method="PUT" action="/topics/{{id}}/edit?_method=PUT">
+  <button type="submit">Edit Topic</button>
+</form></br>
+
+<!-- voting button -->
+<form method ="POST" action="/topics/{{id}}/vote/?_method=PUT">
+  <input type="hidden" name="vote" value="1">
+  <button type="submit">Vote</button>
+</form>
+
+<!-- commenting section -->
+<h2>Comment on this topic</h2>
+<form method ="POST" action="/topics/{{id}}/comments">
+  <TEXTAREA type="text" name="commentsbody" ROWS="10" COLS="100"/>
+</TEXTAREA></br>
+<button type ="submit">comment</button>
+
+
+<!-- list of all previous comments -->
+<ul>
+  {{#allComments}}
+  <li>{{commentsbody}} - {{location}}</li>
+  {{/allComments}}
+</ul>
+</form>
+</body>
+</html>

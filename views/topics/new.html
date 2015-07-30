@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- Add new topics page -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jake's Forum's - Add a new topic</title>
+</head>
+<body>
+
+<nav>
+  <a href="/topics">All topics</a> |
+  <a href ="/topics/new">New Topic</a>
+</nav>
+
+<div><h1>Create your topic</h1></div>
+<form action="/topics/new" method="POST">
+  <label>
+    Title:</br>
+    <input type="text" name="title"/></label></br>
+  </label>
+  <label>
+    Author:</br>
+    <input type="text" name="author"/></br>
+  </label>
+  <label>
+    Body:</br>
+    <TEXTAREA type="text" name="topicsbody" ROWS="20" COLS="100"/>
+  </TEXTAREA>
+</label></br>
+<button>Submit Topic Discussion</button>
+</form>
+</body>
+</html>
